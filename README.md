@@ -1,70 +1,102 @@
-yy年度に卒業修了予定者のレポジトリテンプレート（Copilotと作成）。年度はOverleafと同じ。例：2026年3月卒業の最上叡智産の場合（topicは3語程度）
-
-25-mogami-eichi-scene-flow
-
-以下テンプレ。ここまで消す。
-
-# <project title>
-
-## Repo name (must)
-- Format: `yy-family-given-topic[-purpose]`
-- All lowercase, words separated by hyphens `-`
-- `yy` = graduation/completion fiscal year (2 digits; same rule as Overleaf)
-- Examples:
-  - `25-mogami-eichi-scene-flow`
-  - `25-mogami-eichi-scene-flow-code`
-  - `25-mogami-eichi-scene-flow-data`
+# RNA Base Pair Recognition
 
 ## Overview
-- Author: <family given>
-- FY (yy): <25>
-- Topic keywords: <2-4 words>
-- Upstream (if any): <URL or "none">
+- Author: Huang Yanjie
+- FY (yy): 25
+- Topic keywords: RNA, basepair, YOLOv8-pose,SVM 
+- Upstream: none
+
+This repository provides the environment and execution instructions for RNA base pair recognition using YOLOv8-Pose and SVM classification.
+
+---
 
 ## Environment (must)
-- OS: <Ubuntu 22.04 / Windows 11 / etc.>
-- Python: <e.g., 3.11.7>
-- Key libs: <e.g., numpy==..., torch==..., opencv-python==...>
-- GPU/CUDA (if any): <e.g., CUDA 12.x>
+
+- OS: macOS (Apple Silicon, M2)
+- Python: 3.10
+- Key libraries:
+  - ultralytics
+  - torch
+  - torchvision
+  - opencv-python
+  - numpy
+  - scikit-learn
+- GPU/CUDA: Apple MPS (no CUDA)
+
+---
 
 ## Setup
-### Option A: pip
-```bash
-python -m venv .venv
-source .venv/bin/activate  # (Windows: .venv\Scripts\activate)
-pip install -r requirements.txt
-```
 
-### Option B: conda (if you use environment.yml)
-```bash
-conda env create -f environment.yml
-conda activate <env-name>
-```
+### Option A: pip
+python -m venv .venv  
+source .venv/bin/activate   (Windows: .venv\Scripts\activate)  
+pip install -r requirements.txt  
+
+### Option B: conda (recommended)
+conda env create -f environment.yml  
+conda activate yolov8  
+
+---
 
 ## Data policy (must)
-### Public datasets
-- Do NOT copy dataset files into this repository.
-- Provide the exact URL (paper/official/DOI) and required subset description.
 
-### Private / custom datasets
-- Share via limited-access URL (GitHub/OneDrive/etc.).
-- List required files explicitly (file path, name, size).
-- If manual steps exist, describe them and share only the necessary files.
+### Private dataset
+
+The dataset used in this research is a custom dataset created for RNA base pair models.
+
+Due to size and access restrictions, the dataset is NOT included in this repository.
+
+To obtain the dataset:
+- Contact the author
+
+Required directory structure:
+
+dataset/  
+ ├── images/  
+ ├── labels/  
+ └── data.yaml  
+
+Do NOT upload dataset files to this repository.
+
+---
 
 ## How to run (reproducibility) (must)
-1. Setup environment (above)
-2. Get data (URLs above)
+
+1. Setup environment (see above)
+2. Prepare dataset
 3. Run:
-```bash
-python <your_entrypoint>.py --config <config>
-```
-4. Expected outputs:
-- <output path>
-- <example filenames>
+
+yolo pose predict model=runs_pose/train20/weights/best.pt source=dataset/images  
+
+If using a custom script:
+
+python angle.py  
+
+Modify paths according to your local environment.
+
+---
+
+## Expected outputs
+
+- Detection results saved in:
+  runs/
+- Predicted keypoints for each image
+- Angle calculation results (console or CSV)
+- Classification results for each image
+
+---
 
 ## Reproducibility check (must)
-- Confirm the experiment can be reproduced on another machine.
-- If any manual operation exists, write it below.
+
+Tested on macOS (Apple M2).  
+The environment can be reproduced by creating the conda environment and running the commands above.
+
+---
 
 ## Manual steps (if any)
-- <GUI clicks / parameter edits / file edits, etc.>
+
+- Modify dataset path according to your local environment.
+- Modify model path if necessary.
+- Ensure the trained weight file exists:
+
+runs_pose/train20/weights/best.pt
