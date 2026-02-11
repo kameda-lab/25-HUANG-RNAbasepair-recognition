@@ -1,8 +1,21 @@
-name: kameda-lab
+name: yolov8-pose
 channels:
   - conda-forge
+  - defaults
+
 dependencies:
-  - python=3.11
+  - python=3.10
   - pip
+  - numpy
+  - scipy
+  - scikit-learn
+  - matplotlib
+  - seaborn
+  - pandas
+  - tqdm
+  - pyyaml
   - pip:
-      - -r requirements.txt
+      - ultralytics
+      - torch
+      - torchvision
+      - opencv-python
