@@ -100,3 +100,16 @@ The environment can be reproduced by creating the conda environment and running 
 - Ensure the trained weight file exists:
 
 runs_pose/train20/weights/best.pt
+
+## Model weights
+
+The trained weight file is not included in this repository due to file size limitations.
+
+To run the inference, place the weight file at:
+
+runs_pose/train20/weights/best.pt
+
+You may obtain the weight file by:
+- Contacting the author, or
+- Using a shared link if provided.
+
